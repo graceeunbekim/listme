@@ -5,7 +5,7 @@ import java.util.zip.CheckedInputStream;
 
 import android.util.Log;
 import android.view.View;
-import android.view.Menu;
+import android.content.Intent;
 import android.content.Context;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -19,6 +19,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -105,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
         ListView listTask = (ListView) findViewById(R.id.listView1);
         listTask.setAdapter(adapt);
 
+        // set a delete listener when a user does a long click.
         listTask.setOnItemLongClickListener(new OnItemLongClickListener() {
 
             @Override
@@ -120,6 +122,16 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        listTask.setOnItemClickListener(new OnItemClickListener() {
+                                            @Override
+                                            public void onItemClick(AdapterView parent, View view, int position, long id) {
+                                                Intent intent = new Intent(MainActivity.this, EditItem.class);
+                                                startActivity(intent);
+                                            }
+                                        }
+
+        );
     }
 
     /*
