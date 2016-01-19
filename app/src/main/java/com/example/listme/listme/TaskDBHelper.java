@@ -9,10 +9,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 
 /**
- * Created by grace.kim on 1/19/16.
+ * TaskDBHelper is a helper class to write and read a task into a SQL data base.
  */
 public class TaskDBHelper extends SQLiteOpenHelper {
 
+    // Database Version
     private static final int DATABASE_VERSION = 1;
 
     // Database Name
@@ -45,6 +46,11 @@ public class TaskDBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    /*
+        addTask() takes a task object and writes it into a SQL database.
+
+        @param: task is a Task object.
+     */
     public void addTask(Task task) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -59,6 +65,11 @@ public class TaskDBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    /*
+        getAllTasks() returns a list of Task objects that are written into a current SQL database.
+
+        @return: a list of Task objects from database table.
+     */
     public List<Task> getAllTasks() {
         List<Task> taskList = new ArrayList<Task>();
 
@@ -80,6 +91,13 @@ public class TaskDBHelper extends SQLiteOpenHelper {
         return taskList;
     }
 
+    /*
+       updateTask() takes a new task object ands update a task with new information. If task id
+       that we're targeting to update is matched, then update the information correctly.
+       Otherwise, do not proceed with overwriting.
+
+       @param: task is a Task object with new information that a user wants to overwrite (update).
+     */
     public void updateTask(Task task) {
         // updating row
         SQLiteDatabase db = this.getWritableDatabase();
