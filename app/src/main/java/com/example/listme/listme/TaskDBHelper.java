@@ -107,4 +107,9 @@ public class TaskDBHelper extends SQLiteOpenHelper {
         db.update(TABLE_TASKS, values, KEY_ID + " = ?",
                 new String[]{String.valueOf(task.getId())});
     }
+
+    public boolean deleteTask(int taskId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(TABLE_TASKS, KEY_ID + "=" + taskId, null) > 0;
+    }
 }

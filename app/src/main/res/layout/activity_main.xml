@@ -11,6 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/addButton"
+        android:layout_toStartOf="@+id/addButton"
         android:ems="10"
         />
 

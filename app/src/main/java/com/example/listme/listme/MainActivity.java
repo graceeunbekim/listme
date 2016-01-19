@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Menu;
 import android.content.Context;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -17,6 +18,7 @@ import android.view.LayoutInflater;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemLongClickListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     private class MyAdapter extends ArrayAdapter<Task> {
         Context context;
-        List<Task> taskList=new ArrayList<Task>();
+        List<Task> taskList = new ArrayList<Task>();
         int layoutResourceId;
 
         public MyAdapter(Context context, int layoutResourceId, List<Task> objects) {
@@ -87,6 +89,8 @@ public class MainActivity extends AppCompatActivity {
 
     /*
         onCreate() displays a main activity and get all tasks written into a database.
+        the method also listens to a long click listner to each item. If a user
+        long clicks an item, it deletes the item from database as well as adapter.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +104,22 @@ public class MainActivity extends AppCompatActivity {
         adapt = new MyAdapter(this, R.layout.list_inner_view, list);
         ListView listTask = (ListView) findViewById(R.id.listView1);
         listTask.setAdapter(adapt);
+
+        listTask.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+            @Override
+            public boolean onItemLongClick(AdapterView parent, View view, int position, long id) {
+
+                Task task = list.get(position);
+                int taskId = list.get(position).getId();
+                db.deleteTask(taskId);
+                Log.d("tasker", "" + taskId);
+
+                adapt.remove(task);
+                adapt.notifyDataSetChanged();
+                return false;
+            }
+        });
     }
 
     /*
