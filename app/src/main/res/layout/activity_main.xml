@@ -14,19 +14,20 @@
         android:ems="10"
         />
 
-    <Button android:id="@+id/doneButton"
+    <Button android:id="@+id/addButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:onClick="addTaskNow"
         />
 
-    <ListView
+    <ListView android:id="@+id/listView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@id/doneButton">
+        android:layout_below="@+id/addButton">
     </ListView>
 </RelativeLayout>
