@@ -96,11 +96,18 @@ public class MainActivity extends AppCompatActivity {
                                                 EditText t = (EditText) findViewById(R.id.editText1);
                                                 String s = t.getText().toString();
 
-                                                Task task = list.get(position);
-                                                task.setTaskName(s);
-                                                db.updateTask(task);
-                                                Log.d("tasker", "edit text");
-                                                adapt.notifyDataSetChanged();
+                                                if (s.equalsIgnoreCase("")) {
+                                                    TextView error = (TextView) findViewById(R.id.errorMessage);
+                                                    String message = "please edit the task name.";
+                                                    error.setText(message);
+                                                    adapt.notifyDataSetChanged();
+                                                } else {
+                                                    Task task = list.get(position);
+                                                    task.setTaskName(s);
+                                                    db.updateTask(task);
+                                                    Log.d("tasker", "edit text");
+                                                    adapt.notifyDataSetChanged();
+                                                }
                                             }
                                         }
 
@@ -119,7 +126,9 @@ public class MainActivity extends AppCompatActivity {
         String s = t.getText().toString();
 
         if (s.equalsIgnoreCase("")) {
-            Toast.makeText(this, "enter the task description first!!", Toast.LENGTH_LONG);
+            TextView error = (TextView) findViewById(R.id.errorMessage);
+            String message = "please enter a task name here.";
+            error.setText(message);
         } else {
             Task task = new Task(s, 0);
             db.addTask(task);

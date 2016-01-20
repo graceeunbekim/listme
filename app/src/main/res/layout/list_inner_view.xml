@@ -9,5 +9,6 @@
         android:layout_alignParentLeft="true"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:text="CheckBox" />
+        android:text="CheckBox"
+        style="@style/CodeFont" />
 </RelativeLayout>
