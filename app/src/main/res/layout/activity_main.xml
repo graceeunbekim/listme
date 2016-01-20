@@ -14,6 +14,7 @@
         android:layout_toLeftOf="@+id/addButton"
         android:layout_toStartOf="@+id/addButton"
         android:ems="10"
+        style="@style/CodeFont"
         />
 
     <Button android:id="@+id/addButton"
@@ -24,12 +25,14 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:onClick="addTaskNow"
+        style="@style/CodeFont"
         />
 
     <ListView android:id="@+id/listView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/addButton">
+        android:layout_below="@+id/addButton"
+        style="@style/CodeFont">
     </ListView>
 </RelativeLayout>

@@ -52,40 +52,6 @@ public class MainActivity extends AppCompatActivity {
 
             return rowView;
         }
-//            CheckBox chk = null;
-//
-//            if (convertView == null) {
-//                LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//                View rowView = inflater.inflate(R.layout.list_inner_view, parent, false);
-//                chk=(CheckBox)rowView.findViewById(R.id.checkBox1);
-//                convertView.setTag(chk);
-//
-//                chk.setOnClickListener(new View.OnClickListener() {
-//
-//                    @Override
-//                    public void onClick(View v) {
-//                        CheckBox cb = (CheckBox) v;
-//                        Task changeTask = (Task) cb.getTag();
-//                        changeTask.setStatus(cb.isChecked() == true ? 1 : 0);
-//                        db.updateTask(changeTask);
-//
-//                        Toast.makeText(
-//                                getApplicationContext(),
-//                                "Clicked on Checkbox: " + cb.getText() + " is "
-//                                        + cb.isChecked(), Toast.LENGTH_LONG)
-//                                .show();
-//                    }
-//                });
-//            } else {
-//                chk = (CheckBox) convertView.getTag();
-//            }
-//            Task current = taskList.get(position);
-//            chk.setText(current.getTaskName());
-//            chk.setChecked(current.getStatus() == 1 ? true : false);
-//            chk.setTag(current);
-//            Log.d("listener", String.valueOf(current.getId()));
-//            return convertView;
-//        }
     }
 
     /*
@@ -119,15 +85,22 @@ public class MainActivity extends AppCompatActivity {
 
                 adapt.remove(task);
                 adapt.notifyDataSetChanged();
-                return false;
+                return true;
             }
         });
 
+        // onclick it edit a text
         listTask.setOnItemClickListener(new OnItemClickListener() {
                                             @Override
                                             public void onItemClick(AdapterView parent, View view, int position, long id) {
-                                                Intent intent = new Intent(MainActivity.this, EditItem.class);
-                                                startActivity(intent);
+                                                EditText t = (EditText) findViewById(R.id.editText1);
+                                                String s = t.getText().toString();
+
+                                                Task task = list.get(position);
+                                                task.setTaskName(s);
+                                                db.updateTask(task);
+                                                Log.d("tasker", "edit text");
+                                                adapt.notifyDataSetChanged();
                                             }
                                         }
 
